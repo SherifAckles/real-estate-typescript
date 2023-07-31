@@ -16,7 +16,7 @@ const LoginPage = () => {
     <div
       className='flex flex-col items-center 
     justify-center min-h-screen py-2'>
-      <h1 className='text-center text-blue-500'>Sign in Page</h1>
+      <h1 className='text-center text-white'>Sign in Page</h1>
       <hr />
 
       <label htmlFor='username'>email</label>
@@ -47,7 +47,9 @@ const LoginPage = () => {
         Log in
       </button>
 
-      <Link href='/signUp'>Sign up</Link>
+      <Link className='text-white' href='/signUp'>
+        Sign up
+      </Link>
     </div>
   );
 };
