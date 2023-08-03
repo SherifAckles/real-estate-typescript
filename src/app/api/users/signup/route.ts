@@ -3,7 +3,6 @@ import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
 
-
 connect();
 
 export async function POST(request: NextRequest) {
@@ -23,6 +22,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    //if the password is correct
+    const validPassword = await bcryptjs.compare(password, user.password);
+
+    //if the password isn't a valid Password
+    if (!validPassword) {
+      return NextResponse.json({ error: "Invalid password" }, { status: 400 });
+    }
+
     //hash password
     const salt = await bcryptjs.genSalt(10);
     const hashedPassword = await bcryptjs.hash(password, salt);
@@ -36,7 +43,6 @@ export async function POST(request: NextRequest) {
     const savedUser = await newUser.save();
     console.log(savedUser);
 
-    
     return NextResponse.json({
       message: "User created successfully",
       success: true,
